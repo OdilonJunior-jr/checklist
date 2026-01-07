@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist da Marta | Validação</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        stone: { 50: '#fafaf9', 100: '#f5f5f4', 800: '#292524', 900: '#1c1917' },
+                        gridx: '#111827',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased pb-40">
+
+    <header class="bg-white border-b border-stone-200 sticky top-0 z-50 bg-opacity-95 backdrop-blur-sm shadow-sm">
+        <div class="max-w-3xl mx-auto px-6 h-20 flex justify-between items-center">
+            
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-stone-100 text-stone-800 flex items-center justify-center rounded-full border border-stone-200">
+                    <i class="fa-solid fa-user text-xs"></i>
+                </div>
+                <span class="font-serif font-bold text-lg text-stone-900">Marta Costa</span>
+            </div>
+
+            <div class="text-right">
+                <span class="block text-[10px] uppercase tracking-widest text-gray-400">Validação Final</span>
+                <span class="font-sans font-bold text-sm text-stone-800">Checklist da Marta</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-3xl mx-auto px-6 mt-10">
+        
+        <div class="mb-10 text-center">
+            <h1 class="font-serif text-3xl text-stone-900 mb-2">Conferência Ponto a Ponto</h1>
+            <p class="text-sm text-gray-500 max-w-lg mx-auto">
+                Para garantir que tudo esteja perfeito, separei textos e fotos. Por favor, valide cada item individualmente.
+            </p>
+        </div>
+
+        <form id="auditForm" class="space-y-8">
+
+            <div class="bg-white rounded-lg border border-stone-200 shadow-sm overflow-hidden item-group" id="group-design">
+                <div class="bg-stone-100 px-6 py-4 border-b border-stone-200 flex justify-between items-center">
+                    <h3 class="font-semibold text-sm text-stone-700">1. Identidade Visual</h3>
+                    <div class="flex gap-2">
+                        <button type="button" onclick="validateGroup('design', true)" class="text-gray-300 hover:text-green-600 transition text-xl"><i class="fa-solid fa-circle-check"></i></button>
+                        <button type="button" onclick="validateGroup('design', false)" class="text-gray-300 hover:text-red-600 transition text-xl"><i class="fa-solid fa-circle-xmark"></i></button>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex gap-4 items-center">
+                        <div class="flex -space-x-2">
+                            <div class="w-8 h-8 rounded-full bg-[#F5F5F4] border border-gray-300 shadow-sm"></div>
+                            <div class="w-8 h-8 rounded-full bg-[#44403C] border border-gray-300 shadow-sm"></div>
+                            <div class="w-8 h-8 rounded-full bg-[#1C1917] border border-gray-300 shadow-sm"></div>
+                        </div>
+                        <p class="text-sm text-gray-600">Aprovação das cores (Tons Stone) e Fontes.</p>
+                    </div>
+                </div>
+                <input type="hidden" id="status-design">
+                <input type="text" id="obs-design" class="hidden w-full p-3 border-t border-red-200 bg-red-50 text-sm outline-none" placeholder="Observação...">
+            </div>
+
+            <div class="bg-white rounded-lg border border-stone-200 shadow-sm overflow-hidden item-group" id="group-hero">
+                <div class="bg-stone-100 px-6 py-4 border-b border-stone-200 flex justify-between items-center">
+                    <h3 class="font-semibold text-sm text-stone-700">2. Topo (Hero Section)</h3>
+                </div>
+                <div class="divide-y divide-stone-100">
+                    
+                    <div class="p-5 hover:bg-stone-50 transition sub-item" id="hero-txt">
+                        <div class="flex justify-between items-start gap-4">
+                            <div>
+                                <p class="font-serif text-lg italic text-stone-800">"Sua vulnerabilidade é a sua maior força."</p>
+                                <p class="text-sm text-stone-600 mt-2">"Acolhimento profissional para entender sua história, regular suas emoções e construir uma vida alinhada aos seus valores."</p>
+                            </div>
+                            <div class="flex gap-3 shrink-0">
+                                <button type="button" onclick="validateItem('hero-txt', true)" class="text-gray-300 hover:text-green-600 btn-check text-lg"><i class="fa-solid fa-check"></i></button>
+                                <button type="button" onclick="validateItem('hero-txt', false)" class="text-gray-300 hover:text-red-600 btn-x text-lg"><i class="fa-solid fa-xmark"></i></button>
+                            </div>
+                        </div>
+                        <input type="hidden" id="status-hero-txt">
+                        <input type="text" id="obs-hero-txt" class="hidden w-full mt-2 text-xs border-b border-red-300 text-red-600 outline-none" placeholder="Ajustar texto?">
+                    </div>
+
+                    <div class="p-5 hover:bg-stone-50 transition sub-item" id="hero-img">
+                        <div class="flex justify-between items-center gap-4">
+                            <div class="flex items-center gap-4">
+                                <img src="marta-hero.jpg" class="w-16 h-16 object-cover rounded-md border shadow-sm" alt="Hero">
+                                <span class="text-sm font-bold text-stone-700">Foto de Capa</span>
+                            </div>
+                            <div class="flex gap-3 shrink-0">
+                                <button type="button" onclick="validateItem('hero-img', true)" class="text-gray-300 hover:text-green-600 btn-check text-lg"><i class="fa-solid fa-check"></i></button>
+                                <button type="button" onclick="validateItem('hero-img', false)" class="text-gray-300 hover:text-red-600 btn-x text-lg"><i class="fa-solid fa-xmark"></i></button>
+                            </div>
+                        </div>
+                        <input type="hidden" id="status-hero-img">
+                        <input type="text" id="obs-hero-img" class="hidden w-full mt-2 text-xs border-b border-red-300 text-red-600 outline-none" placeholder="Quer trocar essa foto?">
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg border border-stone-200 shadow-sm overflow-hidden item-group" id="group-bio">
+                <div class="bg-stone-100 px-6 py-4 border-b border-stone-200 flex justify-between items-center">
+                    <h3 class="font-semibold text-sm text-stone-700">3. Sobre & Experiência</h3>
+                </div>
+                
+                <div class="divide-y divide-stone-100">
+                    
+                    <div class="p-5 hover:bg-stone-50 transition sub-item" id="bio-img">
+                        <div class="flex justify-between items-center gap-4">
+                            <div class="flex items-center gap-4">
+                                <img src="marta-sobre.jpg" class="w-16 h-16 object-cover rounded-md border shadow-sm" alt="Sobre">
+                                <span class="text-sm font-bold text-stone-700">Foto de Perfil (Bio)</span>
+                            </div>
+                            <div class="flex gap-3 shrink-0">
+                                <button type="button" onclick="validateItem('bio-img', true)" class="text-gray-300 hover:text-green-600 btn-check text-lg"><i class="fa-solid fa-check"></i></button>
+                                <button type="button" onclick="validateItem('bio-img', false)" class="text-gray-300 hover:text-red-600 btn-x text-lg"><i class="fa-solid fa-xmark"></i></button>
+                            </div>
+                        </div>
+                        <input type="hidden" id="status-bio-img">
+                        <input type="text" id="obs-bio-img" class="hidden w-full mt-2 text-xs border-b border-red-300 text-red-600 outline-none" placeholder="Quer trocar essa foto?">
+                    </div>
+
+                    <div class="p-5 hover:bg-stone-50 transition sub-item" id="bio-9anos">
+                        <div class="flex justify-between items-center gap-4">
+                            <div class="bg-yellow-50 border border-yellow-200 p-2 rounded-md w-full">
+                                <span class="text-xs text-yellow-800 font-bold uppercase block mb-1">Validação de Dado:</span>
+                                <span class="text-sm text-yellow-900">O tempo <strong>"9+ Anos de Prática Clínica"</strong> está correto?</span>
+                            </div>
+                            <div class="flex gap-3 shrink-0">
+                                <button type="button" onclick="validateItem('bio-9anos', true)" class="text-gray-300 hover:text-green-600 btn-check text-lg"><i class="fa-solid fa-check"></i></button>
+                                <button type="button" onclick="validateItem('bio-9anos', false)" class="text-gray-300 hover:text-red-600 btn-x text-lg"><i class="fa-solid fa-xmark"></i></button>
+                            </div>
+                        </div>
+                        <input type="hidden" id="status-bio-9anos">
+                        <input type="text" id="obs-bio-9anos" class="hidden w-full mt-2 text-xs border-b border-red-300 text-red-600 outline-none" placeholder="Qual o tempo correto?">
+                    </div>
+
+                    <div class="p-5 hover:bg-stone-50 transition sub-item" id="bio-p1">
+                        <div class="flex justify-between items-start gap-4">
+                            <div>
+                                <span class="text-[10px] text-gray-400 uppercase tracking-wider font-bold block mb-1">Parágrafo 1 (Missão e TCC)</span>
+                                <p class="text-sm text-stone-700 leading-relaxed">
+                                    "Minha missão é promover saúde mental com embasamento científico e acolhimento. Como psicóloga clínica, atuo principalmente com a <strong>Terapia Cognitivo-Comportamental (TCC)</strong>, ajudando pacientes a reestruturar pensamentos e comportamentos disfuncionais."
+                                </p>
+                            </div>
+                            <div class="flex gap-3 shrink-0">
+                                <button type="button" onclick="validateItem('bio-p1', true)" class="text-gray-300 hover:text-green-600 btn-check text-lg"><i class="fa-solid fa-check"></i></button>
+                                <button type="button" onclick="validateItem('bio-p1', false)" class="text-gray-300 hover:text-red-600 btn-x text-lg"><i class="fa-solid fa-xmark"></i></button>
+                            </div>
+                        </div>
+                        <input type="hidden" id="status-bio-p1">
+                        <input type="text" id="obs-bio-p1" class="hidden w-full mt-2 text-xs border-b border-red-300 text-red-600 outline-none" placeholder="O que mudar neste parágrafo?">
+                    </div>
+
+                    <div class="p-5 hover:bg-stone-50 transition sub-item" id="bio-p2">
+                        <div class="flex justify-between items-start gap-4">
+                            <div>
+                                <span class="text-[10px] text-gray-400 uppercase tracking-wider font-bold block mb-1">Parágrafo 2 (Palestras e Paliativos)</span>
+                                <p class="text-sm text-stone-700 leading-relaxed">
+                                    "Além do consultório, dedico-me a <strong>Palestras e Cursos</strong>, levando conhecimento sobre saúde mental para empresas e grupos. Também ofereço suporte especializado em Cuidados Paliativos, focando sempre na qualidade de vida."
+                                </p>
+                            </div>
+                            <div class="flex gap-3 shrink-0">
+                                <button type="button" onclick="validateItem('bio-p2', true)" class="text-gray-300 hover:text-green-600 btn-check text-lg"><i class="fa-solid fa-check"></i></button>
+                                <button type="button" onclick="validateItem('bio-p2', false)" class="text-gray-300 hover:text-red-600 btn-x text-lg"><i class="fa-solid fa-xmark"></i></button>
+                            </div>
+                        </div>
+                        <input type="hidden" id="status-bio-p2">
+                        <input type="text" id="obs-bio-p2" class="hidden w-full mt-2 text-xs border-b border-red-300 text-red-600 outline-none" placeholder="O que mudar neste parágrafo?">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg border border-stone-200 shadow-sm overflow-hidden item-group" id="group-4">
+                <div class="bg-stone-100 px-6 py-4 border-b border-stone-200 flex justify-between items-center">
+                    <h3 class="font-semibold text-sm text-stone-700">4. Cards de Atuação</h3>
+                </div>
+                
+                <div class="divide-y divide-stone-100">
+                    
+                    <div class="p-5 hover:bg-stone-50 transition sub-item" id="card-1">
+                        <div class="flex justify-between items-start">
+                            <div class="pr-4">
+                                <h4 class="text-sm font-bold text-stone-900">Terapia Cognitivo-Comportamental</h4>
+                                <p class="text-xs text-stone-600 mt-1 leading-relaxed">"Foco principal da atuação clínica. Tratamento estruturado para ansiedade, depressão e regulação emocional."</p>
+                            </div>
+                            <div class="flex gap-3 shrink-0">
+                                <button type="button" onclick="validateItem('card-1', true)" class="text-gray-300 hover:text-green-600 btn-check text-lg"><i class="fa-solid fa-check"></i></button>
+                                <button type="button" onclick="validateItem('card-1', false)" class="text-gray-300 hover:text-red-600 btn-x text-lg"><i class="fa-solid fa-xmark"></i></button>
+                            </div>
+                        </div>
+                        <input type="hidden" id="status-card-1">
+                        <input type="text" id="obs-card-1" class="hidden w-full mt-2 text-xs border-b border-red-300 text-red-600 outline-none" placeholder="Erro no texto?">
+                    </div>
+
+                    <div class="p-5 hover:bg-stone-50 transition sub-item" id="card-2">
+                        <div class="flex justify-between items-start">
+                            <div class="pr-4">
+                                <h4 class="text-sm font-bold text-stone-900">Palestras e Cursos</h4>
+                                <p class="text-xs text-stone-600 mt-1 leading-relaxed">"Promoção de saúde mental para empresas e grupos. Treinamentos e workshops educativos."</p>
+                            </div>
+                             <div class="flex gap-3 shrink-0">
+                                <button type="button" onclick="validateItem('card-2', true)" class="text-gray-300 hover:text-green-600 btn-check text-lg"><i class="fa-solid fa-check"></i></button>
+                                <button type="button" onclick="validateItem('card-2', false)" class="text-gray-300 hover:text-red-600 btn-x text-lg"><i class="fa-solid fa-xmark"></i></button>
+                            </div>
+                        </div>
+                        <input type="hidden" id="status-card-2">
+                        <input type="text" id="obs-card-2" class="hidden w-full mt-2 text-xs border-b border-red-300 text-red-600 outline-none" placeholder="Erro no texto?">
+                    </div>
+
+                    <div class="p-5 hover:bg-stone-50 transition sub-item" id="card-3">
+                        <div class="flex justify-between items-start">
+                            <div class="pr-4">
+                                <h4 class="text-sm font-bold text-stone-900">Ansiedade & Pânico</h4>
+                                <p class="text-xs text-stone-600 mt-1 leading-relaxed">"Para quem vive com sensação de alerta constante, Ansiedade Funcional ou crises de Pânico..."</p>
+                            </div>
+                             <div class="flex gap-3 shrink-0">
+                                <button type="button" onclick="validateItem('card-3', true)" class="text-gray-300 hover:text-green-600 btn-check text-lg"><i class="fa-solid fa-check"></i></button>
+                                <button type="button" onclick="validateItem('card-3', false)" class="text-gray-300 hover:text-red-600 btn-x text-lg"><i class="fa-solid fa-xmark"></i></button>
+                            </div>
+                        </div>
+                        <input type="hidden" id="status-card-3">
+                        <input type="text" id="obs-card-3" class="hidden w-full mt-2 text-xs border-b border-red-300 text-red-600 outline-none" placeholder="Erro no texto?">
+                    </div>
+
+                    <div class="p-5 hover:bg-stone-50 transition sub-item" id="card-4">
+                        <div class="flex justify-between items-start">
+                            <div class="pr-4">
+                                <h4 class="text-sm font-bold text-stone-900">Relacionamentos</h4>
+                                <p class="text-xs text-stone-600 mt-1 leading-relaxed">"Autoconhecimento para lidar com dependência emocional e construção de limites saudáveis."</p>
+                            </div>
+                             <div class="flex gap-3 shrink-0">
+                                <button type="button" onclick="validateItem('card-4', true)" class="text-gray-300 hover:text-green-600 btn-check text-lg"><i class="fa-solid fa-check"></i></button>
+                                <button type="button" onclick="validateItem('card-4', false)" class="text-gray-300 hover:text-red-600 btn-x text-lg"><i class="fa-solid fa-xmark"></i></button>
+                            </div>
+                        </div>
+                        <input type="hidden" id="status-card-4">
+                        <input type="text" id="obs-card-4" class="hidden w-full mt-2 text-xs border-b border-red-300 text-red-600 outline-none" placeholder="Erro no texto?">
+                    </div>
+
+                    <div class="p-5 hover:bg-stone-50 transition sub-item" id="card-5">
+                        <div class="flex justify-between items-start">
+                            <div class="pr-4">
+                                <h4 class="text-sm font-bold text-stone-900">Cuidados Paliativos</h4>
+                                <p class="text-xs text-stone-600 mt-1 leading-relaxed">"Suporte especializado e humano para pacientes e familiares em momentos de diagnóstico difícil."</p>
+                            </div>
+                             <div class="flex gap-3 shrink-0">
+                                <button type="button" onclick="validateItem('card-5', true)" class="text-gray-300 hover:text-green-600 btn-check text-lg"><i class="fa-solid fa-check"></i></button>
+                                <button type="button" onclick="validateItem('card-5', false)" class="text-gray-300 hover:text-red-600 btn-x text-lg"><i class="fa-solid fa-xmark"></i></button>
+                            </div>
+                        </div>
+                        <input type="hidden" id="status-card-5">
+                        <input type="text" id="obs-card-5" class="hidden w-full mt-2 text-xs border-b border-red-300 text-red-600 outline-none" placeholder="Erro no texto?">
+                    </div>
+
+                    <div class="p-5 hover:bg-stone-50 transition sub-item" id="card-6">
+                        <div class="flex justify-between items-start">
+                            <div class="pr-4">
+                                <h4 class="text-sm font-bold text-stone-900">Saúde no Trabalho</h4>
+                                <p class="text-xs text-stone-600 mt-1 leading-relaxed">"Prevenção e tratamento de Burnout e estresse relacionado à carreira profissional."</p>
+                            </div>
+                             <div class="flex gap-3 shrink-0">
+                                <button type="button" onclick="validateItem('card-6', true)" class="text-gray-300 hover:text-green-600 btn-check text-lg"><i class="fa-solid fa-check"></i></button>
+                                <button type="button" onclick="validateItem('card-6', false)" class="text-gray-300 hover:text-red-600 btn-x text-lg"><i class="fa-solid fa-xmark"></i></button>
+                            </div>
+                        </div>
+                        <input type="hidden" id="status-card-6">
+                        <input type="text" id="obs-card-6" class="hidden w-full mt-2 text-xs border-b border-red-300 text-red-600 outline-none" placeholder="Erro no texto?">
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg border border-stone-200 shadow-sm overflow-hidden item-group" id="group-footer">
+                <div class="bg-stone-100 px-6 py-4 border-b border-stone-200 flex justify-between items-center">
+                    <h3 class="font-semibold text-sm text-stone-700">5. Links e Rodapé</h3>
+                    <div class="flex gap-2">
+                        <button type="button" onclick="validateGroup('footer', true)" class="text-gray-300 hover:text-green-600 transition text-xl"><i class="fa-solid fa-circle-check"></i></button>
+                        <button type="button" onclick="validateGroup('footer', false)" class="text-gray-300 hover:text-red-600 transition text-xl"><i class="fa-solid fa-circle-xmark"></i></button>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <p class="text-sm text-gray-600 mb-3">Teste se os links estão direcionando corretamente:</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                        <div class="flex items-center gap-2 text-stone-700 bg-stone-50 p-3 rounded border">
+                            <i class="fa-brands fa-whatsapp text-green-600 text-lg"></i>
+                            <span class="font-medium">(34) 99150-4283</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-stone-700 bg-stone-50 p-3 rounded border">
+                            <i class="fa-brands fa-instagram text-pink-600 text-lg"></i>
+                            <span class="font-medium">@psicologamartamc</span>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" id="status-footer">
+                <input type="text" id="obs-footer" class="hidden w-full p-3 border-t border-red-200 bg-red-50 text-sm outline-none" placeholder="Algum link errado?">
+            </div>
+
+        </form>
+    </div>
+
+    <div class="fixed bottom-0 left-0 w-full bg-white border-t border-stone-200 p-4 shadow-xl z-50">
+        <div class="max-w-3xl mx-auto flex justify-between items-center gap-4">
+            <div class="text-xs text-gray-400 hidden sm:block">
+                Finalizou a revisão? Clique para enviar o relatório.
+            </div>
+            <button onclick="sendReport()" class="w-full sm:w-auto bg-stone-900 hover:bg-black text-white px-8 py-3 rounded-lg font-medium shadow-lg transition transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                <span>Enviar Aprovação</span>
+                <i class="fa-regular fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function validateGroup(id, isValid) {
+            const group = document.getElementById(`group-${id}`);
+            const input = document.getElementById(`status-${id}`);
+            const obs = document.getElementById(`obs-${id}`);
+
+            if (isValid) {
+                group.classList.remove('border-red-200', 'ring-2', 'ring-red-100');
+                group.classList.add('border-green-300', 'ring-2', 'ring-green-50');
+                if(obs) obs.classList.add('hidden');
+                input.value = 'OK';
+            } else {
+                group.classList.remove('border-green-300', 'ring-2', 'ring-green-50');
+                group.classList.add('border-red-200', 'ring-2', 'ring-red-100');
+                if(obs) {
+                    obs.classList.remove('hidden');
+                    obs.focus();
+                }
+                input.value = 'ERRO';
+            }
+        }
+
+        function validateItem(id, isValid) {
+            const row = document.getElementById(id);
+            const statusInput = document.getElementById(`status-${id}`);
+            const obsInput = document.getElementById(`obs-${id}`);
+            const btnCheck = row.querySelector('.btn-check');
+            const btnX = row.querySelector('.btn-x');
+
+            if (isValid) {
+                row.classList.add('bg-green-50');
+                row.classList.remove('bg-red-50');
+                btnCheck.classList.add('text-green-600');
+                btnCheck.classList.remove('text-gray-300');
+                btnX.classList.remove('text-red-600');
+                btnX.classList.add('text-gray-300');
+                if(obsInput) obsInput.classList.add('hidden');
+                statusInput.value = 'OK';
+            } else {
+                row.classList.add('bg-red-50');
+                row.classList.remove('bg-green-50');
+                btnX.classList.add('text-red-600');
+                btnX.classList.remove('text-gray-300');
+                btnCheck.classList.remove('text-green-600');
+                btnCheck.classList.add('text-gray-300');
+                if(obsInput) {
+                    obsInput.classList.remove('hidden');
+                    obsInput.focus();
+                }
+                statusInput.value = 'ERRO';
+            }
+        }
+
+        function sendReport() {
+            let msg = "*Gridx | Validação Final* 📝\n\n";
+            let hasError = false;
+            let pending = 0;
+
+            const groups = [
+                {id: 'design', name: '1. Design'},
+                {id: 'footer', name: '5. Links'}
+            ];
+
+            // Valida Grupos Principais (Design e Footer)
+            groups.forEach(g => {
+                const val = document.getElementById(`status-${g.id}`).value;
+                const obs = document.getElementById(`obs-${g.id}`)?.value;
+                
+                if (val === 'OK') msg += `✅ ${g.name}: Aprovado\n`;
+                else if (val === 'ERRO') {
+                    msg += `⚠️ *${g.name}:* ${obs || 'Ajustar'}\n`;
+                    hasError = true;
+                } else pending++;
+            });
+
+            // Itens de Hero e Sobre
+            const contentItems = [
+                {id: 'hero-txt', name: 'Texto Hero'},
+                {id: 'hero-img', name: 'Foto Hero'},
+                {id: 'bio-img', name: 'Foto Perfil'},
+                {id: 'bio-9anos', name: 'Dado 9 Anos'},
+                {id: 'bio-p1', name: 'Bio Parágrafo 1'},
+                {id: 'bio-p2', name: 'Bio Parágrafo 2'}
+            ];
+
+            msg += "\n*2. & 3. Conteúdo (Hero/Sobre):*\n";
+            contentItems.forEach(item => {
+                const val = document.getElementById(`status-${item.id}`).value;
+                const obs = document.getElementById(`obs-${item.id}`).value;
+                if (val === 'OK') msg += `✅ ${item.name}: OK\n`;
+                else if (val === 'ERRO') {
+                    msg += `❌ ${item.name}: ${obs}\n`;
+                    hasError = true;
+                } else pending++;
+            });
+
+            // Validação dos Cards
+            msg += "\n*4. Cards:*\n";
+            const cardNames = ["TCC", "Palestras", "Ansiedade", "Relacionamentos", "Paliativos", "Saúde Trabalho"];
+
+            for(let i=1; i<=6; i++) {
+                const val = document.getElementById(`status-card-${i}`).value;
+                const obs = document.getElementById(`obs-card-${i}`).value;
+                if (val === 'OK') msg += `✅ ${cardNames[i-1]}: OK\n`;
+                else if (val === 'ERRO') {
+                    msg += `❌ ${cardNames[i-1]}: ${obs || 'Ajustar'}\n`;
+                    hasError = true;
+                } else pending++;
+            }
+
+            if (pending > 0) {
+                alert('Por favor, valide todos os itens antes de enviar.');
+                return;
+            }
+
+            if (!hasError) msg += "\n🚀 *SITE 100% APROVADO!*";
+            else msg += "\n⚠️ *Aguardando ajustes pontuados.*";
+
+            const phone = "55seu_numero_aqui"; 
+            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+    </script>
+</body>
+</html>
